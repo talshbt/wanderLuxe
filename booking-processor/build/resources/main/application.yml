@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: booking-processor
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: 8081
+
+
+
+
+

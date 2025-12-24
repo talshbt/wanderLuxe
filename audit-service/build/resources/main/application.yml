@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: audit-service
+  threads:
+    virtual:
+      enabled: true
+
+server:
+  port: 8082
+
+
+
+
+
