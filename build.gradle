@@ -4,6 +4,14 @@ plugins {
     id 'io.spring.dependency-management' version '1.1.7'
 }
 
+// Version catalog - centralized version management
+ext {
+    springBootVersion = '3.4.0'
+    mapstructVersion = '1.5.5.Final'
+    lombokMapstructBindingVersion = '0.2.0'
+    javaVersion = '21'
+}
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
@@ -23,12 +31,29 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'io.spring.dependency-management'
 
+    // Java 21 compatibility
+    java {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
     dependencies {
+        // Lombok
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
         testCompileOnly 'org.projectlombok:lombok'
         testAnnotationProcessor 'org.projectlombok:lombok'
 
+        // MapStruct for mapping
+        implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+        // MapStruct + Lombok integration
+        annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+
+        // Spring Boot Actuator for health monitoring (all modules)
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+        // Test dependencies
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }
 
@@ -39,7 +64,7 @@ subprojects {
 
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.boot:spring-boot-dependencies:3.4.0"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
     }
 }
 
