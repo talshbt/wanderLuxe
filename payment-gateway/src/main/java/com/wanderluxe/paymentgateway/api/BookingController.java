@@ -17,8 +17,9 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<Void> createBooking(@RequestBody BookingRequest request) {
         // Fire-and-forget semantics: just log and immediately acknowledge
-        log.info("Received booking request: userId={}, offerId={}, quantity={}",
-                request.userId(), request.offerId(), request.quantity());
+        log.info("Received booking request: bookingId={}, propertyId={}, userId={}, amount={} {}, checkIn={}, checkOut={}",
+                request.bookingId(), request.propertyId(), request.userId(),
+                request.amount(), request.currency(), request.checkInDate(), request.checkOutDate());
 
         return ResponseEntity.accepted().build();
     }
