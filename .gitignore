@@ -31,14 +31,18 @@ release.properties
 dependency-reduced-pom.xml
 
 # Gradle
-.gradle/
-build/
+# Ignore Gradle's local cache and internal files in any module
+**/.gradle/
+**/.gradle/file-system.probe
+
+# Ignore all build output directories in every module, but keep Gradle wrapper and build scripts
+**/build/
 !gradle/wrapper/gradle-wrapper.jar
 !gradle/wrapper/gradle-wrapper.properties
 .gradletasknamecache
 
-# IntelliJ IDEA
-.idea/
+# IntelliJ IDEA (any module)
+**/.idea/
 *.iml
 *.iws
 *.ipr

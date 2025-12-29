@@ -53,6 +53,12 @@ subprojects {
         // Spring Boot Actuator for health monitoring (all modules)
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
+        // Spring Data Redis
+        implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+        // Spring Data MongoDB
+        implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
         // Test dependencies
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }

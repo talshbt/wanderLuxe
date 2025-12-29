@@ -1,5 +1,9 @@
 
 
+networks:
+  wanderluxe-network:
+    driver: bridge
+
 services:
   # ----------------------------------------------------------------
   # CORE INFRASTRUCTURE
@@ -12,6 +16,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - "2181:2181"
+    networks:
+      - wanderluxe-network
 
   kafka:
     image: confluentinc/cp-kafka:7.5.0
@@ -30,20 +36,26 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - wanderluxe-network
 
   redis:
-    image: redis:7.2-alpine
+    image: redis:alpine
     container_name: wanderluxe-redis
     ports:
       - "6379:6379"
+    networks:
+      - wanderluxe-network
 
   mongo:
-    image: mongo:6.0
+    image: mongo:latest
     container_name: wanderluxe-mongo
     ports:
       - "27017:27017"
     environment:
       MONGO_INITDB_DATABASE: wanderluxe_db
+    networks:
+      - wanderluxe-network
 
   # ----------------------------------------------------------------
   # MICROSERVICES (Uncomment when you have Dockerfiles created)
